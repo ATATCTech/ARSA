@@ -2,8 +2,8 @@ from Crypto.Signature import PKCS1_v1_5 as _Signature_pkcs1_v1_5
 from Crypto.Cipher import PKCS1_v1_5 as _Cipher_pkcs1_v1_5
 from Crypto.PublicKey import RSA as _RSA
 from Crypto.Hash import SHA256 as _SHA256
-from Crypto import Random
-import base64
+from Crypto import Random as _Random
+import base64 as _base64
 
 
 class AKeyPair(object):
@@ -83,7 +83,7 @@ class APrivateKey(object):
 
 
 def new_keys(key_length: int = 2048):
-    keys = _RSA.generate(key_length, Random.new().read)
+    keys = _RSA.generate(key_length, _Random.new().read)
     return AKeyPair(keys.publickey(), keys)
 
 
@@ -99,7 +99,7 @@ def encrypt(content: str, public_key: APublicKey) -> bytes:
     para_len = int(public_key.get_key_length() / 8) - 11
     # 如果长度足够短就返回加密结果
     if content_len <= para_len:
-        return base64.b64encode(cipher.encrypt(content.encode('utf8')))
+        return _base64.b64encode(cipher.encrypt(content.encode('utf8')))
 
     # 分段加密
     offset: int = 0
@@ -108,17 +108,17 @@ def encrypt(content: str, public_key: APublicKey) -> bytes:
         res += cipher.encrypt(
             content[offset: offset + para_len if content_len - offset > para_len else None].encode('utf8'))
         offset += para_len
-    return base64.b64encode(res)
+    return _base64.b64encode(res)
 
 
-def decrypt(content: base64.bytes_types, private_key: APrivateKey) -> str:
+def decrypt(content: _base64.bytes_types, private_key: APrivateKey) -> str:
     """
     RSA解密（自动分段）
     :param content: 密文
     :param private_key: 私钥
     :return: 明文
     """
-    content = base64.b64decode(content)
+    content = _base64.b64decode(content)
     cipher = _Cipher_pkcs1_v1_5.new(private_key.get_private_key())
     content_len = len(content)
     para_len = int(private_key.get_key_length() / 8)
@@ -136,17 +136,17 @@ def decrypt(content: base64.bytes_types, private_key: APrivateKey) -> str:
     return res.decode()
 
 
-def sign(content: base64.bytes_types, private_key: APrivateKey) -> bytes:
+def sign(content: _base64.bytes_types, private_key: APrivateKey) -> bytes:
     """
     RSA签名
     :param content: 密文
     :param private_key: 私钥
     :return: 签名
     """
-    return base64.b64encode(_Signature_pkcs1_v1_5.new(private_key.get_private_key()).sign(_SHA256.new(content)))
+    return _base64.b64encode(_Signature_pkcs1_v1_5.new(private_key.get_private_key()).sign(_SHA256.new(content)))
 
 
-def verify(content: base64.bytes_types, signature: bytes, public_key: APublicKey) -> bool:
+def verify(content: _base64.bytes_types, signature: bytes, public_key: APublicKey) -> bool:
     """
     RSA读签
     :param content: 密文
@@ -155,4 +155,4 @@ def verify(content: base64.bytes_types, signature: bytes, public_key: APublicKey
     :return: 如果验证成功则返回True, 反之则返回False
     """
     return _Signature_pkcs1_v1_5.new(public_key.get_public_key()).verify(_SHA256.new(content),
-                                                                         base64.b64decode(signature))
+                                                                         _base64.b64decode(signature))
