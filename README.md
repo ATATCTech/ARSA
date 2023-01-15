@@ -32,7 +32,7 @@
    Download source code (.java) [here](https://github.com/ATATC/ARSA/releases/).
 
    ```java
-   import indi.atatc.arsa.ARSA;
+   import com.atatctech.arsa.ARSA;
    ```
 
    #### *Python 3+*

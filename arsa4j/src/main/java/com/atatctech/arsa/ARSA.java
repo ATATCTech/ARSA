@@ -1,4 +1,4 @@
-package indi.atatc.arsa;
+package com.atatctech.arsa;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
