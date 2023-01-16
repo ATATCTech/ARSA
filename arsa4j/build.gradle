@@ -43,6 +43,13 @@ publishing {
                         url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
                     }
                 }
+                developers {
+                    developer {
+                        id = 'ATATC'
+                        name = 'ATATC'
+                        email = 'futerry@outlook.com'
+                    }
+                }
                 scm {
                     connection='scm:git:git:github.com/ATATC/ARSA.git'
                     developerConnection='scm:git:https://github.com/ATATC/ARSA.git'
