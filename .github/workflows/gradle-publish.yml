@@ -6,6 +6,8 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Set working dictionary
+        run: cd arsa4j
       - uses: actions/checkout@v2
       - name: Set up JDK 18
         uses: actions/setup-java@v2
