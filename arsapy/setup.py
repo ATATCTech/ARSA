@@ -5,7 +5,7 @@ setup(
     version='1.1.7',
     description='A multilingual RSA library with segmented encryption and decryption and a unified format.',
     long_description='A multilingual RSA library with segmented encryption and decryption and unified format. All the '
-                     'names of the methods and classes are the same in all languages. ',
+                     'names of the methods and classes are the same in all languages.',
     author='ATATC',
     author_email='futerry@outlook.com',
     maintainer='ATATC',
