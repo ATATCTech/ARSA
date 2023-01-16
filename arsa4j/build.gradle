@@ -37,6 +37,7 @@ publishing {
             pom {
                 name = 'ARSA'
                 description = 'A multilingual RSA library with segmented encryption and decryption and a unified format.'
+                url = 'https://github.com/ATATC/ARSA'
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
@@ -51,9 +52,9 @@ publishing {
                     }
                 }
                 scm {
-                    connection='scm:git:git:github.com/ATATC/ARSA.git'
-                    developerConnection='scm:git:https://github.com/ATATC/ARSA.git'
-                    url='https://github.com/ATATC/ARSA'
+                    connection = 'scm:git:git:github.com/ATATC/ARSA.git'
+                    developerConnection = 'scm:git:https://github.com/ATATC/ARSA.git'
+                    url = 'https://github.com/ATATC/ARSA'
                 }
             }
         }
