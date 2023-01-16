@@ -32,6 +32,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifactId = 'arsa'
+            description = 'A multilingual RSA library with segmented encryption and decryption and a unified format.'
             from components.java
 
             pom {
