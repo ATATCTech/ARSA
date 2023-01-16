@@ -29,7 +29,27 @@
 
    #### *JAVA* 
 
-   Download source code (.java) [here](https://github.com/ATATC/ARSA/releases/).
+   Download the source code (.java) [here](https://github.com/ATATC/ARSA/releases/) or install it through Maven Central:
+
+   ##### Gradle
+
+   ```groovy
+   dependencies {
+       implmentation 'com.atatctech:arsa:1.1.7'
+   }
+   ```
+
+   ##### Maven
+
+   ```xml
+   <dependency>
+       <groupId>com.atatctech</groupId>
+       <artifactId>arsa</artifactId>
+       <version>1.1.7</version>
+   </dependency>
+   ```
+
+   Then import:
 
    ```java
    import com.atatctech.arsa.ARSA;
@@ -37,8 +57,7 @@
 
    #### *Python 3+*
 
-   Download source code (.py) [here](https://github.com/ATATC/ARSA/releases/),
-   or install through pip:
+   Download the source code (.py) [here](https://github.com/ATATC/ARSA/releases/) or install it through Pip:
 
    #### *Windows*
 
@@ -51,6 +70,8 @@
    ```shell
    pip3 install arsa
    ```
+
+   Then import:
 
    ```python
    from arsa import *
@@ -114,7 +135,7 @@
       ARSA.APublicKey publicKey = ARSA.APublicKey.importPublicKey(publicKeyString, keyLength);
       ```
 
-      or from <u>*java.security.PublicKey*</u>
+      Or from `java.security.PublicKey`:
 
       ```java
       PublicKey publicKeyObject;
@@ -132,7 +153,7 @@
 
    2. ### Private keys
 
-      Just change all the name "public" above to "private".
+      Just change every "public" above to "private".
 
 4. ### <span id="export_keys_to_strings">Export keys to Strings</span>
 
@@ -154,7 +175,7 @@
 
    2. ### Private keys
 
-      Just change all the name "public" above to "private".
+      Just change every "public" above to "private".
 
 5. ### <span id="encrypt">Encrypt</span>
 
@@ -234,14 +255,14 @@
 
    1. #### *JAVA*
 
-      ##### To <u>*java.security.PublicKey*</u>:
+      ##### To `java.security.PublicKey`:
 
       ```java
       APublicKey publicKey;
       PublicKey publicKeyObject = publicKey.getPublicKey();
       ```
 
-      ##### To <u>*java.security.PrivateKey*</u>:
+      ##### To `java.security.PrivateKey`:
 
       ```java
       APrivateKey privateKey;
@@ -250,27 +271,17 @@
 
    2. #### *Python 3+*
 
-      ##### To <u>*Crypto.PublicKey.RSA.PublicKey*</u>:
+      ##### To `Crypto.PublicKey.RSA.PublicKey`:
 
       ```python
       public_key: APublicKey
       public_key_object: PublicKey = public_key.get_public_key()
       ```
 
-      ##### To <u>*Crypto.PublicKey.RSA.RsaKey*</u>:
+      ##### To `Crypto.PublicKey.RSA.RsaKey`:
 
       ```python
       private_key: APrivateKey
       private_key_object: RsaKey = private_key.get_private_key()
       ```
-
-      
-
-   
-
-
-
-
-
-
 
