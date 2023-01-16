@@ -12,12 +12,12 @@ jobs:
         with:
           java-version: "18"
           distribution: "adopt"
-      - name: Set working dictionary
-        run: cd arsa4j
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x arsa4j/gradlew
       - name: Build with Gradle
-        run: ./gradlew build
+        run: |
+          cd arsa4j
+          ./gradlew build
       - name: Decode
         run: |
           echo "${{secrets.SIGNING_SECRET_KEY_RING_FILE}}" > ~/.gradle/secring.gpg.base64
