@@ -135,7 +135,7 @@ public class ARSA {
     public static String encrypt(String content, APublicKey publicKey) throws BadPaddingException, IllegalBlockSizeException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.ENCRYPT_MODE, publicKey.getPublicKey());
-        return process(content.getBytes(), publicKey.getKeyLength() / 8 - 11, cipher);
+        return Base64.getEncoder().encodeToString(process(content.getBytes(), publicKey.getKeyLength() / 8 - 11, cipher).getBytes());
     }
 
     public static String decrypt(String content, APrivateKey privateKey) throws BadPaddingException, IllegalBlockSizeException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException {
