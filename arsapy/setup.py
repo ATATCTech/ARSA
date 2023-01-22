@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='arsa',
-    version='1.1.7',
+    version='1.1.9',
     description='A multilingual RSA library with segmented encryption and decryption and a unified format.',
     long_description='A multilingual RSA library with segmented encryption and decryption and unified format. All the '
                      'names of the methods and classes are the same in all languages.',
@@ -27,5 +27,5 @@ setup(
                                                                                                    'Language :: '
                                                                                                    'Python :: 3.7',
                  'Topic :: Software Development :: Libraries'],
-    install_requires=['Crypto>=1.4.1', 'pycryptodome>=3.9.7', 'setuptools>=46.4.0']
+    install_requires=['Crypto>=1.4.1', 'pycryptodome>=3.9.7', 'setuptools>=66.1.1']
 )

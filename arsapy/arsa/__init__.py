@@ -30,7 +30,7 @@ class APublicKey(object):
         :param public_key: 公钥的pem形式
         :param key_length: 公钥二进制长度
         """
-        self.__public_key = public_key.export_key()[27: -25].replace(b'\n', b'').decode()
+        self.__public_key = public_key.export_key()[27: -25].replace(b"\n", b'').decode()
         self.__key_length: int = key_length
         self.__n = public_key
 
@@ -57,13 +57,13 @@ class APublicKey(object):
 
     @staticmethod
     def import_public_key(public_key: bytes, key_length: int):
-        return APublicKey(_RSA.import_key(b'-----BEGIN PUBLIC KEY-----\n' + public_key + b'\n-----END PUBLIC KEY-----'),
+        return APublicKey(_RSA.import_key(b"-----BEGIN PUBLIC KEY-----\n" + public_key + b"\n-----END PUBLIC KEY-----"),
                           key_length)
 
 
 class APrivateKey(object):
     def __init__(self, private_key: _RSA.RsaKey, key_length: int = 2048):
-        self.__private_key = private_key.export_key()[32: -30].replace(b'\n', b'').decode()
+        self.__private_key = private_key.export_key()[32: -30].replace(b"\n", b'').decode()
         self.__key_length: int = key_length
         self.__n = private_key
 
@@ -79,7 +79,7 @@ class APrivateKey(object):
     @staticmethod
     def import_private_key(private_key: bytes, key_length: int):
         return APrivateKey(_RSA.import_key(
-            b'-----BEGIN RSA PRIVATE KEY-----\n' + private_key + b'\n-----END RSA PRIVATE KEY-----'), key_length)
+            b"-----BEGIN RSA PRIVATE KEY-----\n" + private_key + b"\n-----END RSA PRIVATE KEY-----"), key_length)
 
 
 def new_keys(key_length: int = 2048):
@@ -97,16 +97,13 @@ def encrypt(content: str, public_key: APublicKey) -> bytes:
     cipher = _Cipher_pkcs1_v1_5.new(public_key.get_public_key())
     content_len = len(content)
     para_len = int(public_key.get_key_length() / 8) - 11
-    # 如果长度足够短就返回加密结果
     if content_len <= para_len:
-        return _base64.b64encode(cipher.encrypt(content.encode('utf8')))
-
-    # 分段加密
-    offset: int = 0
+        return _base64.b64encode(cipher.encrypt(content.encode("utf8")))
+    offset = 0
     res = b''
     while content_len - offset > 0:
         res += cipher.encrypt(
-            content[offset: offset + para_len if content_len - offset > para_len else None].encode('utf8'))
+            content[offset: offset + para_len if content_len - offset > para_len else None].encode("utf8"))
         offset += para_len
     return _base64.b64encode(res)
 
@@ -122,16 +119,13 @@ def decrypt(content: _base64.bytes_types, private_key: APrivateKey) -> str:
     cipher = _Cipher_pkcs1_v1_5.new(private_key.get_private_key())
     content_len = len(content)
     para_len = int(private_key.get_key_length() / 8)
-    # 如果长度足够短就直接返回解密结果
     if content_len <= para_len:
-        return cipher.decrypt(content, b'ERROR').decode()
-
-    # 分段解密
+        return cipher.decrypt(content, b"ERROR").decode()
     offset: int = 0
     res = b''
     while content_len - offset > 0:
         para = content[offset: int(offset + para_len) if content_len - offset > para_len else None]
-        res += cipher.decrypt(para, b'ERROR')
+        res += cipher.decrypt(para, b"ERROR")
         offset += para_len
     return res.decode()
 

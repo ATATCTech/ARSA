@@ -135,16 +135,16 @@ public class ARSA {
     public static String encrypt(String content, APublicKey publicKey) throws BadPaddingException, IllegalBlockSizeException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.ENCRYPT_MODE, publicKey.getPublicKey());
-        return Base64.getEncoder().encodeToString(process(content.getBytes(), publicKey.getKeyLength() / 8 - 11, cipher).getBytes());
+        return Base64.getEncoder().encodeToString(process(content.getBytes(), publicKey.getKeyLength() / 8 - 11, cipher));
     }
 
     public static String decrypt(String content, APrivateKey privateKey) throws BadPaddingException, IllegalBlockSizeException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, IOException {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
         cipher.init(Cipher.DECRYPT_MODE, privateKey.getPrivateKey());
-        return process(Base64.getDecoder().decode(content), privateKey.getKeyLength() / 8, cipher);
+        return new String(process(Base64.getDecoder().decode(content), privateKey.getKeyLength() / 8, cipher));
     }
 
-    static String process(byte[] contentBytes, int paraLength, Cipher cipher) throws IllegalBlockSizeException, BadPaddingException, IOException {
+    static byte[] process(byte[] contentBytes, int paraLength, Cipher cipher) throws IllegalBlockSizeException, BadPaddingException, IOException {
         int contentLength = contentBytes.length;
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         int offset = 0;
@@ -159,7 +159,7 @@ public class ARSA {
             offset += paraLength;
         }
         try {
-            return byteArrayOutputStream.toString();
+            return byteArrayOutputStream.toByteArray();
         } finally {
             byteArrayOutputStream.close();
         }
