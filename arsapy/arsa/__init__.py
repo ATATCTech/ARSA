@@ -30,7 +30,7 @@ class APublicKey(object):
         :param public_key: 公钥的pem形式
         :param key_length: 公钥二进制长度
         """
-        self.__public_key = public_key.export_key()[27: -25].replace(b"\n", b'').decode()
+        self.__public_key = public_key.export_key(pkcs=8)[27: -25].replace(b"\n", b'').decode()
         self.__key_length: int = key_length
         self.__n = public_key
 
@@ -63,7 +63,7 @@ class APublicKey(object):
 
 class APrivateKey(object):
     def __init__(self, private_key: _RSA.RsaKey, key_length: int = 2048):
-        self.__private_key = private_key.export_key()[32: -30].replace(b"\n", b'').decode()
+        self.__private_key = private_key.export_key(pkcs=8)[28: -26].replace(b"\n", b'').decode()
         self.__key_length: int = key_length
         self.__n = private_key
 
