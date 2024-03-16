@@ -35,7 +35,7 @@
 
    ```groovy
    dependencies {
-       implmentation 'com.atatctech:arsa:1.1.7'
+       implmentation 'com.atatctech:arsa:2.0.0'
    }
    ```
 
@@ -45,7 +45,7 @@
    <dependency>
        <groupId>com.atatctech</groupId>
        <artifactId>arsa</artifactId>
-       <version>1.1.7</version>
+       <version>2.0.0</version>
    </dependency>
    ```
 
